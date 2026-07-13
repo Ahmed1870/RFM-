@@ -1,4 +1,7 @@
 # Customer Behavior & RFM Analysis
+## Dashboard Preview
+
+![Dashboard](images/dashboard_preview.png)
 
 ## Overview
 
