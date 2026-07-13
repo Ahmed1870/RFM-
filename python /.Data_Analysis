@@ -1,0 +1,29 @@
+import pandas as pd
+
+# Load Data
+df = pd.read_csv("../data/processed/customer_rfm.csv")
+
+# Calculate Quantiles
+r = pd.qcut(df["Recency"],5,labels=[5,4,3,2,1])
+
+f = pd.qcut(
+df["Frequency"].rank(method="first"),
+5,
+labels=[1,2,3,4,5]
+)
+
+m = pd.qcut(df["Monetary"],5,labels=[1,2,3,4,5])
+
+df["R"] = r.astype(int)
+df["F"] = f.astype(int)
+df["M"] = m.astype(int)
+
+df["RFM_Score"] = (
+df["R"].astype(str)
++
+df["F"].astype(str)
++
+df["M"].astype(str)
+)
+
+print(df.head())
