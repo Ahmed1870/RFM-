@@ -1,0 +1,50 @@
+/*
+=========================================
+Customer Behavior & RFM Analysis
+Data Cleaning
+Author: Ahmed Gomaa
+=========================================
+*/
+
+-- Remove cancelled invoices
+
+SELECT *
+FROM OnlineRetail
+WHERE InvoiceNo NOT LIKE 'C%';
+
+------------------------------------------------
+
+-- Remove missing Customer IDs
+
+SELECT *
+FROM OnlineRetail
+WHERE CustomerID IS NOT NULL;
+
+------------------------------------------------
+
+-- Remove negative quantities
+
+SELECT *
+FROM OnlineRetail
+WHERE Quantity > 0;
+
+------------------------------------------------
+
+-- Remove negative prices
+
+SELECT *
+FROM OnlineRetail
+WHERE UnitPrice > 0;
+
+------------------------------------------------
+
+-- Final Clean Dataset
+
+SELECT *
+
+FROM OnlineRetail
+
+WHERE CustomerID IS NOT NULL
+AND Quantity > 0
+AND UnitPrice > 0
+AND InvoiceNo NOT LIKE 'C%';
