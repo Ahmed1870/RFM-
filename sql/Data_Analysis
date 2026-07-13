@@ -1,0 +1,39 @@
+/*
+=========================================
+RFM Analysis
+=========================================
+*/
+
+WITH CleanData AS (
+
+SELECT *
+
+FROM OnlineRetail
+
+WHERE CustomerID IS NOT NULL
+AND Quantity>0
+AND UnitPrice>0
+AND InvoiceNo NOT LIKE 'C%'
+
+)
+
+SELECT
+
+CustomerID,
+
+MAX(InvoiceDate) LastPurchase,
+
+DATE_PART(
+'day',
+DATE '2011-12-10' - MAX(InvoiceDate)
+) AS Recency,
+
+COUNT(DISTINCT InvoiceNo) AS Frequency,
+
+ROUND(SUM(Quantity*UnitPrice),2) AS Monetary
+
+FROM CleanData
+
+GROUP BY CustomerID
+
+ORDER BY Monetary DESC;
