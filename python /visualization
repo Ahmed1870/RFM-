@@ -1,0 +1,18 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("../data/processed/customer_rfm.csv")
+
+plt.figure(figsize=(8,5))
+
+plt.hist(df["Monetary"],bins=30)
+
+plt.title("Customer Spending")
+
+plt.xlabel("Monetary")
+
+plt.ylabel("Customers")
+
+plt.tight_layout()
+
+plt.savefig("../dashboard/dashboard.png")
